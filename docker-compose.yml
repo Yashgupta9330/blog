@@ -33,7 +33,7 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
-      - app
+      - backend
 
 volumes:
   postgres_data:
