@@ -113,7 +113,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         description: "You can now log in with your credentials",
       })
 
-      router.push("/login")
+      router.push("/signin")
     } catch (error) {
       toast({
         title: "Registration failed",
