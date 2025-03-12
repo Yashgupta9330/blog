@@ -5,7 +5,7 @@ from app.models.user import User
 from app.database import get_db
 from app.utils.auth import get_current_user
 from app.schemas.post import PostList, PostCreate, PostResponse, PostUpdate
-from app.services.post import create_blog_post, get_blog_post, get_blog_posts, update_blog_post, delete_blog_post
+from app.services.post import create_blog_post, get_blog_post, get_blog_posts, update_blog_post, delete_blog_post, get_user_posts
 from app.config import settings
 
 router = APIRouter(prefix="/api/blogs", tags=["Blog Posts"])
@@ -20,7 +20,7 @@ def create_post(
 
 @router.get("/{post_id}", response_model=PostResponse)
 def get_post(post_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    post = get_blog_post(db, post_id,current_user)
+    post = get_blog_post(db, post_id, current_user)
     if not post:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -61,4 +61,25 @@ def delete_post(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    return delete_blog_post(db, post_id, current_user.id)
+    return delete_blog_post(db, post_id, current_user)
+
+# Fixed route placement to avoid conflicts with {post_id} route
+@router.get("/user/{user_id}", response_model=PostList)
+def get_posts_by_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+    page: int = Query(1, ge=1, description="Page number"),
+    size: int = Query(settings.DEFAULT_PAGE_SIZE, ge=1, le=settings.MAX_PAGE_SIZE, description="Items per page"),
+    search: Optional[str] = Query(None, description="Search term for title or content")
+):
+    skip = (page - 1) * size
+    posts, total, current_page, limit, pages = get_user_posts(db, current_user.id, skip, size, search)
+    
+    return {
+        "items": posts,
+        "total": total,
+        "page": current_page,
+        "size": limit,
+        "pages": pages
+    }

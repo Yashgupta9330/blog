@@ -8,14 +8,6 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str = Field(..., min_length=8)
-    
-    @field_validator('password')
-    def password_must_be_strong(cls, v):
-        if not any(char.isdigit() for char in v):
-            raise ValueError('Password must contain at least one digit')
-        if not any(char.isupper() for char in v):
-            raise ValueError('Password must contain at least one uppercase letter')
-        return v
 
 class UserLogin(BaseModel):
     username: str
