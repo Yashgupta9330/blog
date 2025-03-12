@@ -60,7 +60,7 @@ Blogi is a fullstack blogging platform built with **FastAPI** and **PostgreSQL**
 
 3. Start the backend services using Docker Compose:
    ```sh
-  docker-compose up --build
+   docker-compose up --build
 
 
 ### Frontend Setup
@@ -72,8 +72,8 @@ Blogi is a fullstack blogging platform built with **FastAPI** and **PostgreSQL**
 
 2. install dependencies:
    ```sh
-  npm i
+   npm i
 
 3. Start the frontend services :
    ```sh
-  npm run dev
+   npm run dev
