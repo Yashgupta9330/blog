@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import type React from "react"
-import Link from "next/link"
-import { useAuth } from "@/context/auth-context"
-import { Button } from "@/components/ui/button"
-import { ModeToggle } from "./toggle-theme"
+import type React from "react";
+import Link from "next/link";
+import { useAuth } from "@/context/auth-context";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "./toggle-theme";
 
 export function Navbar() {
-  const { user, logout } = useAuth()
+  const { user, logout } = useAuth();
 
   return (
     <header className="border-b w-full">
@@ -16,7 +16,6 @@ export function Navbar() {
           Blogi
         </Link>
 
-       
         <div className="flex items-center gap-4">
           <ModeToggle />
 
@@ -25,6 +24,9 @@ export function Navbar() {
               <span className="text-sm hidden md:inline">{user.username}</span>
               <Button asChild variant="outline">
                 <Link href="/blog">New Post</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/dashboard">Dashboard</Link>
               </Button>
               <Button onClick={logout} variant="ghost">
                 Logout
@@ -43,5 +45,5 @@ export function Navbar() {
         </div>
       </div>
     </header>
-  )
+  );
 }
