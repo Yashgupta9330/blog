@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Upload } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import Image from "next/image";
 
 import { createBlog } from "@/api/blog";
 import { getPresignedUrl, uploadToPresignedUrl } from "@/api/upload";
@@ -152,10 +153,11 @@ export default function CreateBlogPage() {
 
               {imagePreview && (
                 <div className="mt-4 aspect-video w-full max-w-md overflow-hidden rounded-md border">
-                  <img
+                  <Image
                     src={imagePreview || "/placeholder.svg"}
                     alt="Preview"
-                    className="h-full w-full object-cover"
+                    layout="fill"
+                    objectFit="cover"
                   />
                 </div>
               )}

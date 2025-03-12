@@ -17,7 +17,7 @@ const BlogCardWithAction = blogCardWithActions(BlogCard);
 const UserBlogs = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
-  const { user, token, isLoading } = useAuth();
+  const { user, isLoading } = useAuth();
   const router = useRouter();
   console.log("user ", user);
 
@@ -42,11 +42,11 @@ const UserBlogs = () => {
     }
   }, [user, isLoading, router]);
 
-  const handleEdit = (id: string) => {
+  const handleEdit = (id: number) => {
     router.push(`/edit/${id}`);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number) => {
     console.log("Delete blog:", id);
   };
 

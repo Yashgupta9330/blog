@@ -19,7 +19,7 @@ const BlogPage = () => {
   const [loading, setLoading] = useState(!!blogId);
   const [blog, setBlog] = useState<Blog | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const { user, token, isLoading: authLoading } = useAuth();
+  const { token, isLoading: authLoading } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
 

@@ -9,13 +9,11 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { RoughNotation } from "react-rough-notation"
 import Link from "next/link"
 import BtnLoader from "@/components/btn-loader"
 import toast from "react-hot-toast"
 import { useState } from "react"
 import { Eye, EyeOff, Lock, Mail } from "lucide-react"
-import { useRouter } from "next/navigation"
 import { useAuth } from "@/context/auth-context"
 
 
@@ -35,14 +33,15 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
 
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const router = useRouter()
-  const { login, isLoading } = useAuth()
+
+  const { login } = useAuth()
   
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
     setLoading(true)
     const { username, password } = data
     try {
       const res = await login(username, password);
+      console.log("res ",res)
     } catch (error) {
       console.error(error)
       toast.error("Something went wrong during login. Please try again.")

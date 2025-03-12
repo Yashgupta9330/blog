@@ -9,12 +9,10 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { RoughNotation } from "react-rough-notation"
 import Link from "next/link"
 import { useState } from "react"
 import toast from "react-hot-toast"
 import BtnLoader from "@/components/btn-loader"
-import { useRouter } from "next/navigation"
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react"
 import { useAuth } from "@/context/auth-context"
 
@@ -43,14 +41,14 @@ export function SignupForm({ className, ...props }: React.ComponentProps<"form">
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const router = useRouter()
-  const { registerUser, isLoading } = useAuth()
+  const { registerUser } = useAuth()
   const onSubmit = async (data: z.infer<typeof signupSchema>) => {
     console.log("submitted")
     setLoading(true)
     const { userName, email, password } = data
     try {
       const res = await registerUser(userName, email, password)
+      console.log("res ",res)
     } catch (error) {
       console.error(error)
       toast.error("Something went wrong during signup. Please try again.")

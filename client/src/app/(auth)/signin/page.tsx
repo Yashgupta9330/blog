@@ -1,6 +1,4 @@
 "use client"
-
-import { BookOpenText } from "lucide-react"
 import Link from "next/link"
 import { LoginForm } from "@/components/auth/login-form"
 import { ModeToggle } from "@/components/toggle-theme"

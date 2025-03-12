@@ -12,6 +12,7 @@ import { Loader2, Upload } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { getBlogById, updateBlogById } from "@/api/blog";
 import { getPresignedUrl, uploadToPresignedUrl } from "@/api/upload";
+import Image from "next/image";
 
 export default function EditBlogPage() {
   const [title, setTitle] = useState("");
@@ -196,10 +197,11 @@ export default function EditBlogPage() {
 
               {imagePreview && (
                 <div className="mt-4 aspect-video w-full max-w-md overflow-hidden rounded-md border">
-                  <img
+                  <Image
                     src={imagePreview || "/placeholder.svg"}
                     alt="Preview"
-                    className="h-full w-full object-cover"
+                    layout="fill"
+                    objectFit="cover"
                   />
                 </div>
               )}

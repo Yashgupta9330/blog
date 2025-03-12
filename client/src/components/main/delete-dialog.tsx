@@ -18,7 +18,7 @@ import toast from "react-hot-toast";
 interface DeleteDialog {
   triggerLabel: React.ReactNode | string;
   description?: string;
-  tableId: string;
+  tableId: number;
 }
 
 export function DeleteDialog({
